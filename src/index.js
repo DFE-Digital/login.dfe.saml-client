@@ -1,7 +1,8 @@
 const express = require('express');
-const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const passport = require('passport');
+const SamlStrategy = require('passport-saml').Strategy;
 const morgan = require('morgan');
 const winston = require('winston');
 const path = require('path');
@@ -13,31 +14,79 @@ const app = express();
 const logger = new (winston.Logger)({
   colors: config.loggerSettings.colors,
   transports: [
-    new (winston.transports.Console)({ level: 'info', colorize: true }),
+    new (winston.transports.Console)({level: 'info', colorize: true}),
   ],
+});
+
+
+// Passport
+passport.use(new SamlStrategy(
+  {
+    path: '/login/callback',
+    entryPoint: config.identityProvider.url,
+    issuer: config.identityProvider.issuer
+  },
+  function (profile, done) {
+    return done(null,
+      {
+        id: profile['http://schemas.microsoft.com/identity/claims/objectidentifier'],
+        name: profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']
+      });
+  })
+);
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
 });
 
 
 // Express settings
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
-app.set('layout', 'layouts/layout');
 
 // Express middleware
-app.use(expressLayouts);
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session(
-  {
-    resave: true,
-    saveUninitialized: true,
-    secret: config.hostingEnvironment.sessionSecret
-  }));
-app.use(morgan('combined', { stream: fs.createWriteStream('./access.log', { flags: 'a' }) }));
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: config.hostingEnvironment.sessionSecret
+}));
+app.use(morgan('combined', {stream: fs.createWriteStream('./access.log', {flags: 'a'})}));
 app.use(morgan('dev'));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/', function(req, res) {
-  res.send('Hi there!');
+
+// Routes
+app.get('/', function (req, res) {
+  res.render('index', {
+    isLoggedIn: req.isAuthenticated(),
+    user: req.user ? req.user : {id: '', name: ''}
+  });
 });
+
+app.get('/login',
+  passport.authenticate('saml',
+    {
+      successRedirect: '/',
+      failureRedirect: '/login'
+    })
+);
+
+app.post('/login/callback',
+  passport.authenticate('saml',
+    {
+      failureRedirect: '/',
+      failureFlash: true
+    }),
+  function (req, res) {
+    res.redirect('/');
+  }
+);
+
 
 // Setup server
 if (config.hostingEnvironment.env === 'dev') {
