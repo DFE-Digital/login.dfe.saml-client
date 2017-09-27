@@ -57,3 +57,11 @@ typings/
 # dotenv environment variables file
 .env
 
+# webstorm
+.idea
+
+# dev stuff
+ssl
+.DS_Store
+
+access.log
