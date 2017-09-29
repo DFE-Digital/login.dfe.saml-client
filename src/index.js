@@ -24,7 +24,9 @@ passport.use(new SamlStrategy(
   {
     path: '/login/callback',
     entryPoint: config.identityProvider.url,
-    issuer: config.identityProvider.issuer
+    issuer: config.identityProvider.issuer,
+    authnRequestBinding: 'HTTP-POST',
+    skipRequestCompression: true
   },
   function (profile, done) {
     return done(null,
