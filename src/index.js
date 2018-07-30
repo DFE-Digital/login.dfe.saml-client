@@ -14,8 +14,8 @@ const app = express();
 const logger = new (winston.Logger)({
   colors: config.loggerSettings.colors,
   transports: [
-    new (winston.transports.Console)({level: 'info', colorize: true}),
-  ],
+    new (winston.transports.Console)({level: 'info', colorize: true})
+  ]
 });
 
 
@@ -29,13 +29,14 @@ passport.use(new SamlStrategy(
     skipRequestCompression: true
   },
   function (profile, done) {
-    return done(null,
-      {
-        id: profile['http://schemas.microsoft.com/identity/claims/objectidentifier'],
-        name: profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']
-      });
+    let user = profile;
+    user.id = profile['http://schemas.microsoft.com/identity/claims/objectidentifier'];
+    user.name = profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
+    return done(null, {...user});
   })
 );
+
 passport.serializeUser(function (user, done) {
   done(null, user);
 });
@@ -64,8 +65,17 @@ app.use(passport.session());
 
 // Routes
 app.get('/', function (req, res) {
+
+  let user_assertions = [];
+  if (req.isAuthenticated()) {
+    for (let i = 0; i < Object.keys(req.user).length; i++) {
+      user_assertions.push(`${Object.keys(req.user)[i]} - ${req.user[Object.keys(req.user)[i]]}` )
+    }
+  }
+
   res.render('index', {
     isLoggedIn: req.isAuthenticated(),
+    user_assertions,
     user: req.user ? req.user : {id: '', name: ''}
   });
 });
@@ -99,7 +109,7 @@ if (config.hostingEnvironment.env === 'dev') {
     key: fs.readFileSync('./ssl/localhost.key'),
     cert: fs.readFileSync('./ssl/localhost.cert'),
     requestCert: false,
-    rejectUnauthorized: false,
+    rejectUnauthorized: false
   };
   const server = https.createServer(options, app);
 

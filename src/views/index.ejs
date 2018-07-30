@@ -10,7 +10,15 @@
             <% if (!locals.isLoggedIn) { %>
             <a href="/Login">Get yourself logged in</a>
             <% } else { %>
-            <span>Welcome <%=user.name%></span>
+                <h2>AUTHENTICATED</h2>
+                <ul>
+                    <% for(let i = 0; i < locals.user_assertions.length; i++) {%>
+                        <li><%= locals.user_assertions[i] %></li>
+                    <% } %>
+                </ul>
+                <div>
+                    <a href="/login">Login in again?</a>
+                </div>
             <% } %>
         </div>
     </header>
