@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const winston = require('winston');
 const path = require('path');
 const fs = require('fs');
+const formatXML = require('xml-formatter');
 
 const config = require('./Config');
 
@@ -14,7 +15,7 @@ const app = express();
 const logger = new (winston.Logger)({
   colors: config.loggerSettings.colors,
   transports: [
-    new (winston.transports.Console)({level: 'info', colorize: true})
+    new (winston.transports.Console)({ level: 'info', colorize: true })
   ]
 });
 
@@ -33,7 +34,11 @@ passport.use(new SamlStrategy(
     user.id = profile['http://schemas.microsoft.com/identity/claims/objectidentifier'];
     user.name = profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
 
-    return done(null, {...user});
+    if (process.env.DISPLAY_XML) {
+      fs.writeFile('assertion.xml', formatXML(profile.getAssertionXml()), () => { });
+    }
+
+    return done(null, { ...user });
   })
 );
 
@@ -51,13 +56,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
 
 // Express middleware
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: config.hostingEnvironment.sessionSecret
 }));
-app.use(morgan('combined', {stream: fs.createWriteStream('./access.log', {flags: 'a'})}));
+app.use(morgan('combined', { stream: fs.createWriteStream('./access.log', { flags: 'a' }) }));
 app.use(morgan('dev'));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,14 +74,14 @@ app.get('/', function (req, res) {
   let user_assertions = [];
   if (req.isAuthenticated()) {
     for (let i = 0; i < Object.keys(req.user).length; i++) {
-      user_assertions.push(`${Object.keys(req.user)[i]} - ${req.user[Object.keys(req.user)[i]]}` )
+      user_assertions.push(`${Object.keys(req.user)[i]} - ${req.user[Object.keys(req.user)[i]]}`)
     }
   }
 
   res.render('index', {
     isLoggedIn: req.isAuthenticated(),
     user_assertions,
-    user: req.user ? req.user : {id: '', name: ''}
+    user: req.user ? req.user : { id: '', name: '' }
   });
 });
 
