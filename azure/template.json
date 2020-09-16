@@ -76,32 +76,6 @@
         },
         {
             "apiVersion": "2017-05-10",
-            "name": "[concat(parameters('appServiceName'), '-certificate')]",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-certificate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "keyVaultCertificateName": {
-                        "value": "[parameters('certificateName')]"
-                    },
-                    "keyVaultName": {
-                        "value": "[parameters('keyVaultName')]"
-                    },
-                    "keyVaultResourceGroup": {
-                        "value": "[parameters('keyVaultResourceGroup')]"
-                    },
-                    "serverFarmId": {
-                        "value": "[reference(parameters('appServicePlanName')).outputs.appServicePlanId.Value]"
-                    }
-                }
-            }
-        },
-        {
-            "apiVersion": "2017-05-10",
             "name": "[parameters('appServiceName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
