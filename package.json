@@ -27,6 +27,7 @@
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-saml": "^0.15.0",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "xml-formatter": "^1.2.0"
   }
 }

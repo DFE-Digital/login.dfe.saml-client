@@ -23,6 +23,6 @@ module.exports = {
   },
   identityProvider: {
     url: process.env.IDENTITY_URL ? process.env.IDENTITY_URL : 'https://localhost:4433/saml',
-    issuer: process.env.IDENTITY_ISSUER ? process.env.IDENTITY_ISSUER : 'https://localhost:44301/ee69778a-a39b-11e7-abc4-cec278b6b50a'
+    issuer: process.env.IDENTITY_ISSUER ? process.env.IDENTITY_ISSUER : 'https://localhost:3005/ee69778a-a39b-11e7-abc4-cec278b6b50a'
   }
 };
