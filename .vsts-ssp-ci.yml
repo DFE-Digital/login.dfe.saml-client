@@ -19,19 +19,30 @@ variables:
 - group: platform-global
 
 stages:
-- template: /Infrastructure/steps/deploy-template.yml@devopsTemplates
-  parameters:
-    serviceConnection: $(serviceConnection)
-    subscriptionId: $(devSubscriptionId)
-    resourceGroupName: $(projectId)d01-samlclient
-    location: $(deploymentPrimaryLocation)
-    templateFilePath: '$(Build.SourcesDirectory)/azure/template.json'
-    armParameterOverrideString: '
-        -appServiceName "samlclient"
-        -appServicePlanName "samlclient-asp"
-        -appServicePlanSku "{ "name": "S1", "tier": "Standard", "size": "S1", "family": "S", "capacity": 2}"
-        -appServicePlanRG "$(projectId)d01-samlclient"
-        -nodeVersion "14.5.0"
-        -minTlsVersion "1.2"
-        -numberOfWorkers 1
-        -appServiceConfigPath "" '
+- stage: Deploy
+  jobs:
+  - deployment: deployService
+    displayName: Deploy SAML client
+    environment: "dev"
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: /Infrastructure/steps/deploy-template.yml@devopsTemplates
+            parameters:
+              serviceConnection: $(serviceConnection)
+              subscriptionId: $(devSubscriptionId)
+              resourceGroupName: $(projectId)d01-samlclient
+              location: $(deploymentPrimaryLocation)
+              templateFilePath: '$(Build.SourcesDirectory)/azure/template.json'
+              armParameterOverrideString: '
+                -appServiceName "samlclient"
+                -appServicePlanName "samlclient-asp"
+                -appServicePlanSku "{ "name": "S1", "tier": "Standard", "size": "S1", "family": "S", "capacity": 2}"
+                -appServicePlanRG "$(projectId)d01-samlclient"
+                -nodeVersion "14.5.0"
+                -minTlsVersion "1.2"
+                -numberOfWorkers 1
+                -appServiceConfigPath "" '
