@@ -121,11 +121,13 @@
                         }
                     }	                    
 				}
-            }
+            
         },
             "dependsOn": [
                 "[parameters('appServicePlanName')]"
-            ]
+            
+        ]
+    }
     ]
 }
 
