@@ -44,13 +44,14 @@ stages:
       runOnce:
         deploy:
           steps:
+          - 
           - template: /Infrastructure/steps/deploy-template.yml@devopsTemplates
             parameters:
               serviceConnection: $(devServiceConnection)
               subscriptionId: $(devSubscriptionId)
               resourceGroupName: $(projectId)d01-samlclient
               location: $(deploymentPrimaryLocation)
-              templateFilePath: '$(Build.SourcesDirectory)/azure/template.json'
+              templateFilePath: '$(Build.ArtifactStagingDirectory)/azure/template.json'
               armParameterOverrideString: '
                 -appServiceName "$(projectId)d01-samlclient"
                 -appServicePlanName "$(projectId)d01-samlclient-asp"
