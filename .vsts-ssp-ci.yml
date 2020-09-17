@@ -34,4 +34,4 @@ stages:
         -nodeVersion "14.5.0"
         -minTlsVersion "1.2"
         -numberOfWorkers 1
-        -appServiceConfigPath ""
+        -appServiceConfigPath "" '
