@@ -194,6 +194,7 @@
                         "value": {	
                             "test": "test"
                      }
+					 }
                 }
             },
             "dependsOn": [
