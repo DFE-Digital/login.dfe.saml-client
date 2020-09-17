@@ -18,6 +18,7 @@ trigger:
 variables:
 - group: platform-global
 
+stages:
 #build
 - stage: build
   displayName: Build
@@ -28,12 +29,10 @@ variables:
       artifactName: samlclient-$(Build.BuildId)
       additionalFoldersForBuild: ${{parameters.additionalFoldersForBuild}}
 
-
-
-
 #Deploy
 - stage: Deploy
   dependsOn: build
+  displayName: Build
   jobs:
   - deployment: deployService
     displayName: Deploy SAML client
