@@ -8,19 +8,22 @@
         "appServiceName": {
             "value": ""
         },
-        "appServicePlanSku": {
-            "value": ""
-        },
         "appServicePlanRG": {
             "value": ""
         },
         "nodeVersion": {
             "value": ""
         },
+        "customHostName": {
+            "value": ""
+        },
         "keyVaultName": {
             "value": ""
         },
         "keyVaultResourceGroup": {
+            "value": ""
+        },
+        "certificateName": {
             "value": ""
         },
         "numberOfWorkers": {

@@ -11,7 +11,7 @@
         "appServicePlanName": {
             "type": "string",
             "metadata": {
-                "description": "The name of the App Service Plan"
+                "description": "The sku of the App Service"
             }
         },
         "appServicePlanSku": {
@@ -26,11 +26,39 @@
                 "description": "Resource Group where the ASP lives"
             }
         },
-        "runtimeStack": {
+        "nodeVersion": {
+            "type": "string",
+            "defaultValue": "12.9.0",
+            "metadata": {
+                "description": "The default NodeJS version that the App Service will run"
+            }
+        },
+        "minTlsVersion": {
+            "type": "string",
+            "defaultValue": "1.0",
+            "metadata": {
+                "description": "The minimum tls version for the service"
+            }
+        },
+        "numberOfWorkers": {
+            "type": "int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "The number of workers to assign to the app service within the app service plan"
+            }
+        },
+        "appServiceConfigPath": {
             "type": "string",
             "metadata": {
-                "description": "The name of the runtime stack for the container"
+                "description": "JSON string containing app config"
             }
+        },
+        "customHostName": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "certificateName": {
+            "type": "string"
         },
         "keyVaultName": {
             "type": "string",
@@ -42,6 +70,24 @@
             "type": "string",
             "metadata": {
                 "description": "The name of the Resource Group that contains the Key Vault"
+            }
+        },
+        "auditServiceBusConnectionString": {
+            "type": "string",
+            "metadata": {
+                "description": "ASB Connection String"
+            }
+        },
+        "auditServiceBusTopicName": {
+            "type": "string",
+            "metadata": {
+                "description": "ASB Topic Name"
+            }
+        },
+        "auditServiceBusSubscriptionName": {
+            "type": "string",
+            "metadata": {
+                "description": "ASB Subscription Name"
             }
         }
     },
@@ -76,12 +122,38 @@
         },
         {
             "apiVersion": "2017-05-10",
+            "name": "[concat(parameters('appServiceName'), '-certificate')]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-certificate.json",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "keyVaultCertificateName": {
+                        "value": "[parameters('certificateName')]"
+                    },
+                    "keyVaultName": {
+                        "value": "[parameters('keyVaultName')]"
+                    },
+                    "keyVaultResourceGroup": {
+                        "value": "[parameters('keyVaultResourceGroup')]"
+                    },
+                    "serverFarmId": {
+                        "value": "[reference(parameters('appServicePlanName')).outputs.appServicePlanId.Value]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
             "name": "[parameters('appServiceName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-linux.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-azure-config.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -94,8 +166,30 @@
                     "appServicePlanRG": {
                         "value": "[parameters('appServicePlanRG')]"
                     },
-                    "runtimeStack": {
-                        "value": "[parameters('runtimeStack')]"
+                    "nodeVersion": {
+                        "value": "[parameters('nodeVersion')]"
+                    },
+                    "numberOfWorkers": {
+                        "value": "[parameters('numberOfWorkers')]"
+                    },
+                    "appServiceConfigPath": {
+                        "value": "[parameters('appServiceConfigPath')]"
+                    },
+                    "minTlsVersion": {
+                        "value": "[parameters('minTlsVersion')]"
+                    },
+                    "customHostName": {
+                        "value": "[parameters('customHostName')]"
+                    },
+                    "certificateThumbprint": {
+                        "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
+                    },
+                    "additionalAppSettings": {
+                        "value": {
+                            "QUEUE_CONNECTION_STRING": "[parameters('auditServiceBusConnectionString')]",
+                            "TOPIC_NAME": "[parameters('auditServiceBusTopicName')]",
+                            "SUBSCRIPTION_NAME": "[parameters('auditServiceBusSubscriptionName')]"
+                        }
                     }
                 }
             },
