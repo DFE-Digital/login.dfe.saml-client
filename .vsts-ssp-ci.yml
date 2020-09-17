@@ -32,7 +32,7 @@ stages:
           steps:
           - template: /Infrastructure/steps/deploy-template.yml@devopsTemplates
             parameters:
-              serviceConnection: $(serviceConnection)
+              serviceConnection: $(devServiceConnection)
               subscriptionId: $(devSubscriptionId)
               resourceGroupName: $(projectId)d01-samlclient
               location: $(deploymentPrimaryLocation)
