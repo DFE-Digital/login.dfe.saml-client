@@ -52,49 +52,6 @@
             "metadata": {
                 "description": "JSON string containing app config"
             }
-        },
-        "customHostName": {
-            "type": "string",
-            "defaultValue": ""
-        },
-        "certificateName": {
-            "type": "string"
-        },
-        "keyVaultName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the Key Vault that stores application certificates"
-            }
-        },
-        "keyVaultResourceGroup": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the Resource Group that contains the Key Vault"
-            }
-        },
-        "environmentId": {
-            "type": "string",
-            "metadata": {
-                "description": "Environment Identifier"
-            }
-        },
-	    "auditServiceBusConnectionString": {
-            "type": "string",
-            "metadata": {
-                "description": "ASB Connection String"
-            }
-        },
-        "auditServiceBusTopicName": {
-            "type": "string",
-            "metadata": {
-                "description": "ASB Topic Name"
-            }
-        },
-        "auditServiceBusSubscriptionName": {
-            "type": "string",
-            "metadata": {
-                "description": "ASB Subscription Name"
-            }
         }
     },
     "variables": {
@@ -122,32 +79,6 @@
                     },
                     "appServicePlanIsLinux": {
                         "value": true
-                    }
-                }
-            }
-        },
-        {
-            "apiVersion": "2017-05-10",
-            "name": "[concat(parameters('appServiceName'), '-certificate')]",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-certificate.json",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "keyVaultCertificateName": {
-                        "value": "[parameters('certificateName')]"
-                    },
-                    "keyVaultName": {
-                        "value": "[parameters('keyVaultName')]"
-                    },
-                    "keyVaultResourceGroup": {
-                        "value": "[parameters('keyVaultResourceGroup')]"
-                    },
-                    "serverFarmId": {
-                        "value": "[reference(parameters('appServicePlanName')).outputs.appServicePlanId.Value]"
                     }
                 }
             }
@@ -183,18 +114,7 @@
                     },
                     "minTlsVersion": {
                         "value": "[parameters('minTlsVersion')]"
-                    },
-                    "customHostName": {
-                        "value": "[parameters('customHostName')]"
-                    },
-                    "certificateThumbprint": {
-                        "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
-                    },
-					 "additionalAppSettings": {	
-                        "value": {	
-                            "test": "test"
-                     }
-					 }
+                    }
                 }
             },
             "dependsOn": [
