@@ -189,7 +189,11 @@
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
-                    }
+                    },
+					 "additionalAppSettings": {	
+                        "value": {	
+                            "test": "test"
+                     }
                 }
             },
             "dependsOn": [
