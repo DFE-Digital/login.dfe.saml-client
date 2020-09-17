@@ -27,7 +27,7 @@ stages:
     parameters:
       applicationName: samlclient
       artifactName: samlclient-$(Build.BuildId)
-      additionalFoldersForBuild: ""
+      additionalFoldersForBuild: "ssl"
 
 #Deploy
 - stage: Deploy
