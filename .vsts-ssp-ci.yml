@@ -44,7 +44,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          - 
           - template: /Infrastructure/steps/deploy-template.yml@devopsTemplates
             parameters:
               serviceConnection: $(devServiceConnection)
