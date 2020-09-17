@@ -27,7 +27,6 @@ stages:
     parameters:
       applicationName: samlclient
       artifactName: samlclient-$(Build.BuildId)
-      additionalFoldersForBuild: ${{parameters.additionalFoldersForBuild}}
 
 #Deploy
 - stage: Deploy
