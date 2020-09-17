@@ -21,6 +21,6 @@ variables:
 stages:
 - template: /Application/node/stages/signin-master-stage.yml@devopsTemplates
   parameters:
-    applicationName: saml-client
+    applicationName: samlclient
     resourceGroupSuffix: samlclient
     armTemplateName: template.json
