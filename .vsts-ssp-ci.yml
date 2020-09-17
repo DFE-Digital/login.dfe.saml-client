@@ -33,7 +33,7 @@ stages:
 #Deploy
 - stage: Deploy
   dependsOn: build
-  displayName: Build
+  displayName: Deploy
   jobs:
   - deployment: deployService
     displayName: Deploy SAML client

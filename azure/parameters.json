@@ -34,6 +34,43 @@
         },
         "appServiceConfigPath": {
             "value": ""
-        }
+        },
+        "appInsightsInstrumentationKey": {
+            "value": ""
+        },
+        "exclientBaseUrl": {
+            "value": ""
+        },
+        "samlSigningCert": {
+            "value": ""
+        },
+        "oidcHost": {
+            "value": ""
+        },
+        "redisConn": {
+            "value": ""
+        },
+        "samlSigningCertRsaPrivateKey": {
+            "value": ""
+        },
+        "secretKeyBase": {
+            "value": ""
+        },
+        "serviceID": {
+            "value": ""
+        },
+        "assertionsHost": {
+            "value": ""
+        },
+        "assertionsSecret": {
+            "value": ""
+        },
+        "profileHost": {
+            "value": ""
+        },
+        "identityURL": {
+            "value": ""
+        }      
+    }		
     }
 }
