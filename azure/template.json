@@ -115,17 +115,18 @@
                     "minTlsVersion": {
                         "value": "[parameters('minTlsVersion')]"
                     },
-					 "additionalAppSettings": {	
-                        "value": {	
-                            "test": "test"
-                     }
-					}
-                }
+					"additionalAppSettings": {
+                        "value": {
+                            "TEST": "test"
+                        }
+                    }	                    
+				}
             }
         },
             "dependsOn": [
                 "[parameters('appServicePlanName')]"
             ]
-        }
     ]
 }
+
+
