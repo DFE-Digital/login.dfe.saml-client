@@ -47,12 +47,90 @@
                 "description": "The number of workers to assign to the app service within the app service plan"
             }
         },
-        "appServiceConfigPath": {
+        "appInsightsInstrumentationKey": {
             "type": "string",
+            "defaultValue": "[parameters('appInsightsInstrumentationKey')]",
             "metadata": {
-                "description": "JSON string containing app config"
+                "description": "Required value for application service"
             }
-        }
+        },
+        "exclientBaseUrl": {
+            "type": "string",
+            "defaultValue": "[parameters('exclientBaseUrl')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "samlSigningCert": {
+            "type": "string",
+            "defaultValue": "[parameters('samlSigningCert')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "oidcHost": {
+            "type": "string",
+            "defaultValue": "[parameters('oidcHost')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "redisConn": {
+            "type": "string",
+            "defaultValue": "[parameters('redisConn')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "samlSigningCertRsaPrivateKey": {
+            "type": "string",
+            "defaultValue": "[parameters('samlSigningCertRsaPrivateKey')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "secretKeyBase": {
+            "type": "string",
+            "defaultValue": "[parameters('secretKeyBase')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "serviceID": {
+            "type": "string",
+            "defaultValue": "[parameters('serviceID')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "assertionsHost": {
+            "type": "string",
+            "defaultValue": "[parameters('assertionsHost')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "assertionsSecret": {
+            "type": "string",
+            "defaultValue": "[parameters('assertionsSecret')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "profileHost": {
+            "type": "string",
+            "defaultValue": "[parameters('oidcHost')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "identityURL": {
+            "type": "string",
+            "defaultValue": "[parameters('identityURL')]",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        }      
     },
     "variables": {
     },
@@ -109,23 +187,75 @@
                     "numberOfWorkers": {
                         "value": "[parameters('numberOfWorkers')]"
                     },
-                    "appServiceConfigPath": {
-                        "value": "[parameters('appServiceConfigPath')]"
-                    },
                     "minTlsVersion": {
                         "value": "[parameters('minTlsVersion')]"
                     },
+                    "appInsightsInstrumentationKey": {
+                        "value": "[parameters('appInsightsInstrumentationKey')]"
+                    },
+                    "exclientBaseUrl": {
+                        "value": "[parameters('exclientBaseUrl')]"
+                    },
+                    "samlSigningCert": {
+                        "value": "[parameters('samlSigningCert')]"
+                    },
+                    "oidcHost": {
+                        "value": "[parameters('oidcHost')]"
+                    },
+                    "redisConn": {
+                        "value": "[parameters('redisConn')]"
+                    },
+                    "samlSigningCertRsaPrivateKey": {
+                        "value": "[parameters('samlSigningCertRsaPrivateKey')]"
+                    },
+                    "secretKeyBase": {
+                        "value": "[parameters('secretKeyBase')]"
+                    },
+                    "serviceID": {
+                        "value": "[parameters('serviceID')]"
+                    },
+                    "assertionsHost": {
+                        "value": "[parameters('assertionsHost')]"
+                    },
+                    "assertionsSecret": {
+                        "value": "[parameters('assertionsSecret')]"
+                    },
+                    "profileHost": {
+                        "value": "[parameters('oidcHost')]"
+                    },
+                    "identityURL": {
+                        "value": "[parameters('identityURL')]"
+                    },
 					"additionalAppSettings": {
                         "value": {
-                            "TEST": "test"
+                            "APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('appInsightsInstrumentationKey')]",
+							"BASE_URL": "[parameters('exclientBaseUrl')]",
+							"CERT": "[parameters('samlSigningCert')]",
+							"LANG": "en_US.UTF-8",
+							"OIDC_CLIENT_ID": "EXCLIENT",
+							"OIDC_CLIENT_SECRET": "exclient",
+							"OIDC_HOST": "[parameters('oidcHost')]",
+							"RACK_ENV": "production",
+							"RAILS_ENV": "production",
+							"RAILS_LOG_TO_STDOUT": "enabled",
+							"RAILS_SERVE_STATIC_FILES": "enabled",
+							"REDIS_URL": "[concat(parameters('redisConn'),'/6')]",
+							"SECRET_KEY": "[parameters('samlSigningCertRsaPrivateKey')]",
+							"SECRET_KEY_BASE": "[parameters('SecretKeyBase')]",
+							"USE_TEST_IDP": "false",
+							"SERVICE_ID":  "[parameters('serviceID')]",
+							"ASSERTION_API": "[parameters('assertionsHost')]",
+							"ASSERTION_API_SECRET": "[parameters('assertionsSecret')]",
+							"SLO_URL": "[concat('https://',parameters('profileHost'),'/signout/')]",
+							"SCM_DO_BUILD_DURING_DEPLOYMENT": "true",
+							"IDENTITY_URL": "[parameters('identityURL')]", 
+							"DISPLAY_XML": "false"
                         }
                     }	                    
-				}
-            
+				}   
         },
             "dependsOn": [
                 "[parameters('appServicePlanName')]"
-            
         ]
     }
     ],

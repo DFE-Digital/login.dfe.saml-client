@@ -18,8 +18,22 @@ trigger:
 variables:
 - group: platform-global
 
-stages:
+#build
+- stage: build
+  displayName: Build
+  jobs:
+  - template: /Application/node/jobs/signin-master-build-job.yml@devopsTemplates
+    parameters:
+      applicationName: samlclient
+      artifactName: samlclient-$(Build.BuildId)
+      additionalFoldersForBuild: ${{parameters.additionalFoldersForBuild}}
+
+
+
+
+#Deploy
 - stage: Deploy
+  dependsOn: build
   jobs:
   - deployment: deployService
     displayName: Deploy SAML client
@@ -38,11 +52,22 @@ stages:
               location: $(deploymentPrimaryLocation)
               templateFilePath: '$(Build.SourcesDirectory)/azure/template.json'
               armParameterOverrideString: '
-                -appServiceName "samlclient"
-                -appServicePlanName "samlclient-asp"
+                -appServiceName "$(projectId)d01-samlclient"
+                -appServicePlanName "$(projectId)d01-samlclient-asp"
                 -appServicePlanSku "{ "name": "S1", "tier": "Standard", "size": "S1", "family": "S", "capacity": 2}"
                 -appServicePlanRG "$(projectId)d01-samlclient"
-                -nodeVersion "14.5.0"
+                -nodeVersion "14.5"
                 -minTlsVersion "1.2"
                 -numberOfWorkers 1
-                -appServiceConfigPath "" '
+                -appInsightsInstrumentationKey "$(appInsightsInstrumentationKey)"
+                -exclientBaseUrl "$(exclientBaseUrl)"
+                -samlSigningCert "$(samlSigningCert)"
+                -oidcHost "$(oidcHost)"
+                -redisConn "$(redisConn)"
+                -samlSigningCertRsaPrivateKey "$(samlSigningCertRsaPrivateKey)"
+                -secretKeyBase "$(secretKeyBase)"
+                -serviceID "$(serviceID)"
+                -assertionsHost "$(assertionsHost)"
+                -assertionsSecret "$(assertionsSecret)"
+                -profileHost "$(profileHost)"
+                -identityURL "$(identityURL)"'
