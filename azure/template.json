@@ -49,84 +49,84 @@
         },
         "appInsightsInstrumentationKey": {
             "type": "string",
-            "defaultValue": "[parameters('appInsightsInstrumentationKey')]",
+            "defaultValue": "",
             "metadata": {
                 "description": "Required value for application service"
             }
         },
         "exclientBaseUrl": {
             "type": "string",
-            "defaultValue": "[parameters('exclientBaseUrl')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "samlSigningCert": {
             "type": "string",
-            "defaultValue": "[parameters('samlSigningCert')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "oidcHost": {
             "type": "string",
-            "defaultValue": "[parameters('oidcHost')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "redisConn": {
             "type": "string",
-            "defaultValue": "[parameters('redisConn')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "samlSigningCertRsaPrivateKey": {
             "type": "string",
-            "defaultValue": "[parameters('samlSigningCertRsaPrivateKey')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "secretKeyBase": {
             "type": "string",
-            "defaultValue": "[parameters('secretKeyBase')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "serviceID": {
             "type": "string",
-            "defaultValue": "[parameters('serviceID')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "assertionsHost": {
             "type": "string",
-            "defaultValue": "[parameters('assertionsHost')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "assertionsSecret": {
             "type": "string",
-            "defaultValue": "[parameters('assertionsSecret')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "profileHost": {
             "type": "string",
-            "defaultValue": "[parameters('oidcHost')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
         },
         "identityURL": {
             "type": "string",
-            "defaultValue": "[parameters('identityURL')]",
+            "defaultValue": "",
             "metadata": {
                "description": "Required value for application service"
             }
