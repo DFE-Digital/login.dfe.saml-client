@@ -171,13 +171,6 @@
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
-                    },
-                    "additionalAppSettings": {
-                        "value": {
-                            "QUEUE_CONNECTION_STRING": "[parameters('auditServiceBusConnectionString')]",
-                            "TOPIC_NAME": "[parameters('auditServiceBusTopicName')]",
-                            "SUBSCRIPTION_NAME": "[parameters('auditServiceBusSubscriptionName')]"
-                        }
                     }
                 }
             },
