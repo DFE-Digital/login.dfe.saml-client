@@ -13,7 +13,7 @@ resources:
 trigger:
   branches:
     include:
-    - feature/yaml-pipeline
+    - master
 
 variables:
 - group: platform-global
