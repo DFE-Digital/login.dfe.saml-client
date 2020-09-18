@@ -1,4 +1,4 @@
-# login.dfe.saml-client
+# login.dfe.samlclient
 Example SAML client to connect to DfE Login SAML Proxy
 
 ## Getting Started
