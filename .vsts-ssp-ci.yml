@@ -96,7 +96,7 @@ stages:
         inputs:
           azureSubscription: $(devServiceConnection)
           appType: webAppLinux
-          WebAppName: loginsamlclient
+          WebAppName: $(projectId)d01-samlclient
           deployToSlotOrASE: true
           ResourceGroupName: $(projectId)d01-samlclient
           SlotName: staging
