@@ -17,6 +17,7 @@ trigger:
 
 variables:
 - group: platform-global
+- group: platform-dev-samlclient
 
 stages:
 #build
@@ -88,7 +89,8 @@ stages:
          downloadPath: '$(System.ArtifactsDirectory)'
       
       - pwsh: |
-              Get-ChildItem -Path $(System.ArtifactsDirectory) –Recurse
+              Set-Location $(System.ArtifactsDirectory)
+              Get-ChildItem –Recurse
       
       - task: AzureRmWebAppDeployment@4
         displayName: Deploy Code
@@ -99,6 +101,7 @@ stages:
           deployToSlotOrASE: true
           ResourceGroupName: $(projectId)d01-samlclient
           SlotName: staging
+          packageForLinux: '$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip'
           RuntimeStack: NODE|12.9
           WebConfigParameters: "-Handler iisnode -NodeStartFile $(platformGlobalNodeStart) -appType node"
           enableCustomDeployment: true
