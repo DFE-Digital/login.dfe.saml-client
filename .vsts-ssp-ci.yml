@@ -31,7 +31,7 @@ stages:
       - 'ssl//**' 
 
 #Deploy
-- stage: Deploy
+- stage: deploy
   dependsOn: build
   displayName: Deploy
   jobs:
@@ -73,3 +73,33 @@ stages:
                 -assertionsSecret "$(assertionsSecret)"
                 -profileHost "$(profileHost)"
                 -identityURL "$(identityURL)"'
+         
+- stage: publishapp
+  dependsOn: deploy
+  displayName: Publish App
+  jobs: 
+   - job: publish
+     steps:
+      - task: DownloadBuildArtifacts@0
+        inputs:
+         buildType: 'current'
+         downloadType: 'single'
+         artifactName: 'samlclientapp'
+         downloadPath: '$(System.ArtifactsDirectory)'
+          
+      - task: AzureRmWebAppDeployment@4
+        displayName: Deploy Code
+        inputs:
+          azureSubscription: $(devServiceConnection)
+          appType: webAppLinux
+          WebAppName: 'loginsamlclient'
+          deployToSlotOrASE: true
+          ResourceGroupName: $(projectId)d01-samlclient
+          SlotName: 'staging'
+          packageForLinux: '$($(System.ArtifactsDirectory)/samlclientapp.zip'
+          RuntimeStack: 'NODE|12.9'
+          WebConfigParameters: '-Handler iisnode -NodeStartFile $(platformGlobalNodeStart) -appType node'
+          enableCustomDeployment: true
+          TakeAppOfflineFlag: false
+          RemoveAdditionalFilesFlag: true
+          ExcludeFilesFromAppDataFlag: false
