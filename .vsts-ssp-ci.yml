@@ -88,8 +88,8 @@ stages:
          downloadPath: '$(System.ArtifactsDirectory)'
       
       - pwsh: |
-              Set-Location $(System.ArtifactsDirectory)
-              Get-ChildItem –Recurse
+         Set-Location $(System.ArtifactsDirectory)
+         Get-ChildItem –Recurse
       
       - task: AzureRmWebAppDeployment@4
         displayName: Deploy Code
