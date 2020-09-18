@@ -17,7 +17,6 @@ trigger:
 
 variables:
 - group: platform-global
-- group: platform-dev-samlclient
 
 stages:
 #build
