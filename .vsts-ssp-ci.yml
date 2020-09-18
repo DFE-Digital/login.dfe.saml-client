@@ -84,7 +84,7 @@ stages:
         inputs:
          buildType: 'current'
          downloadType: 'single'
-         artifactName: 'samlclientapp'
+         artifactName: 'samlclient-$(Build.BuildId)'
          downloadPath: '$(System.ArtifactsDirectory)'
           
       - task: AzureRmWebAppDeployment@4
