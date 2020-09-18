@@ -79,14 +79,12 @@ stages:
   displayName: Publish App
   jobs: 
    - job: publish
-     steps:
-      - task: DownloadBuildArtifacts@0
+     steps:     
+      - task: DownloadPipelineArtifact@2
         inputs:
-         buildType: 'current'
-         downloadType: 'single'
-         artifactName: 'samlclient-$(Build.BuildId)'
-         downloadPath: '$(System.ArtifactsDirectory)'
-      
+          artifact: samlclient-$(Build.BuildId)
+          path: $(System.ArtifactsDirectory)
+
       - pwsh: Get-ChildItem $(System.ArtifactsDirectory) –Recurse
       
       - task: AzureRmWebAppDeployment@4
