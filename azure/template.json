@@ -168,7 +168,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-					"uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-azure-config-extended.json",
+					"uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-azure-config.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -182,49 +182,22 @@
                         "value": "[parameters('appServicePlanRG')]"
                     },
                     "nodeVersion": {
-                        "value": "node|12.9"
+                        "value": "[parameters('nodeVersion')]"
                     },
                     "numberOfWorkers": {
                         "value": "[parameters('numberOfWorkers')]"
                     },
+                    "appServiceConfigPath": {
+                        "value": ""
+                    },
                     "minTlsVersion": {
                         "value": "[parameters('minTlsVersion')]"
                     },
-                    "appInsightsInstrumentationKey": {
-                        "value": "[parameters('appInsightsInstrumentationKey')]"
+                    "customHostName": {
+                        "value": ""
                     },
-                    "exclientBaseUrl": {
-                        "value": "[parameters('exclientBaseUrl')]"
-                    },
-                    "samlSigningCert": {
-                        "value": "[parameters('samlSigningCert')]"
-                    },
-                    "oidcHost": {
-                        "value": "[parameters('oidcHost')]"
-                    },
-                    "redisConn": {
-                        "value": "[parameters('redisConn')]"
-                    },
-                    "samlSigningCertRsaPrivateKey": {
-                        "value": "[parameters('samlSigningCertRsaPrivateKey')]"
-                    },
-                    "secretKeyBase": {
-                        "value": "[parameters('secretKeyBase')]"
-                    },
-                    "serviceID": {
-                        "value": "[parameters('serviceID')]"
-                    },
-                    "assertionsHost": {
-                        "value": "[parameters('assertionsHost')]"
-                    },
-                    "assertionsSecret": {
-                        "value": "[parameters('assertionsSecret')]"
-                    },
-                    "profileHost": {
-                        "value": "[parameters('oidcHost')]"
-                    },
-                    "identityURL": {
-                        "value": "[parameters('identityURL')]"
+                    "certificateThumbprint": {
+                        "value": ""
                     },
 					"additionalAppSettings": {
                         "value": {
