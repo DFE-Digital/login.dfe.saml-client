@@ -64,7 +64,10 @@ stages:
                 -certificateName "blank"
                 -appServiceConfigPath "/var"
                 -keyVaultName "blank"
-                -keyVaultResourceGroup "blank"'
+                -keyVaultResourceGroup "blank"
+                -auditServiceBusConnectionString "auditbus-dev-sb-1.servicebus.windows.net"
+                -auditServiceBusTopicName "audit"
+                -auditServiceBusSubscriptionName "blank"'
 
 - stage: publishapp
   dependsOn: deploy
