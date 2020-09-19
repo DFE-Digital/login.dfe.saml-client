@@ -1,0 +1,28 @@
+{
+    "variables": {
+        "settings": {
+            "APPINSIGHTS_INSTRUMENTATIONKEY": "__test_AppInsights__",
+            "BASE_URL": "https://__test_exclientBaseUrl__",
+            "CERT": "__test_SamlSigningCert__",
+            "LANG": "en_US.UTF-8",
+            "OIDC_CLIENT_ID": "EXCLIENT",
+            "OIDC_CLIENT_SECRET": "exclient",
+            "OIDC_HOST": "__test_oidcHost__",
+            "RACK_ENV": "production",
+            "RAILS_ENV": "production",
+            "RAILS_LOG_TO_STDOUT": "enabled",
+            "RAILS_SERVE_STATIC_FILES": "enabled",
+            "REDIS_URL": "__test_ProxyRedisCon__/6",
+            "SECRET_KEY": "__test_SamlSigningCertRsaPrivateKey__",
+            "SECRET_KEY_BASE": "ddddd",
+            "USE_TEST_IDP": "false",
+            "SERVICE_ID": "913ba321-9547-46b2-93c3-a7a7ffc2e3e2",
+            "ASSERTION_API": "https://__test_assertionsHost__/",
+            "ASSERTION_API_SECRET": "__test_AssertionsSecret__",
+            "SLO_URL": "https://__test_profileHost__/signout/",
+            "SCM_DO_BUILD_DURING_DEPLOYMENT": "true",
+	    "IDENTITY_URL": "https://test-gias.signin.education.gov.uk/saml/auth",
+	    "DISPLAY_XML": "false"
+        }
+    }
+}

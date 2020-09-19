@@ -182,7 +182,7 @@
                         "value": "[parameters('appServicePlanRG')]"
                     },
                     "nodeVersion": {
-                        "value": "[parameters('nodeVersion')]"
+                        "value": "node|12.9"
                     },
                     "numberOfWorkers": {
                         "value": "[parameters('numberOfWorkers')]"
