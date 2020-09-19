@@ -60,7 +60,7 @@ stages:
                 -minTlsVersion 1.2
                 -numberOfWorkers 1
                 -nodeVersion 14.5.0
-                -appServiceConfigPath "/var" 
+                -appServiceConfigPath "/var"'
                
 
 - stage: publishapp
@@ -89,9 +89,9 @@ stages:
           deployToSlotOrASE: true
           ResourceGroupName: $(projectId)d01-samlclient
           SlotName: staging
-          packageForLinux: '$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip'
+          packageForLinux: "$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip"
           RuntimeStack: Node|12.9
-          WebConfigParameters: "-Handler iisnode -NodeStartFile $(platformGlobalNodeStart) -appType node"
+          WebConfigParameters: '-Handler iisnode -NodeStartFile $(platformGlobalNodeStart) -appType node'
           enableCustomDeployment: true
           TakeAppOfflineFlag: false
           RemoveAdditionalFilesFlag: true
