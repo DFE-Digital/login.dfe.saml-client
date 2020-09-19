@@ -57,6 +57,7 @@ stages:
                 -appServiceName $(projectId)d01-samlclient
                 -appServicePlanName $(projectId)d01-samlclient-asp
                 -appServicePlanRG $(projectId)d01-samlclient
+                -appServicePlanSku "{ "name": "S1", "tier": "Standard", "size": "S1", "family": "S", "capacity": 2}"
                 -minTlsVersion 1.2
                 -numberOfWorkers 1
                 -nodeVersion 14.5.0
