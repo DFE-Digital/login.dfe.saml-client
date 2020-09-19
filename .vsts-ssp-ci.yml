@@ -96,7 +96,7 @@ stages:
           ResourceGroupName: $(projectId)d01-samlclient
           SlotName: staging
           packageForLinux: "$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip"
-          RuntimeStack: Node|12.9
+          RuntimeStack: "node|12.9"
           WebConfigParameters: '-Handler iisnode -NodeStartFile $(platformGlobalNodeStart) -appType node'
           enableCustomDeployment: true
           TakeAppOfflineFlag: false
