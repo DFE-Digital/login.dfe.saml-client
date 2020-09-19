@@ -63,7 +63,8 @@ stages:
                 -nodeVersion 14.5.0
                 -certificateName "blank"
                 -appServiceConfigPath "/var"'
-               
+                -keyVaultName "blank"
+                -keyVaultResourceGroup "blank"'
 
 - stage: publishapp
   dependsOn: deploy
