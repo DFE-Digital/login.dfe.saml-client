@@ -61,8 +61,6 @@ stages:
                 -minTlsVersion 1.2
                 -numberOfWorkers 1
                 -nodeVersion 14.5.0
-                -certificateName "blank"
-                -appServiceConfigPath "/var"
                 -appInsightsInstrumentationKey $(appInsightsInstrumentationKey)
                 -exclientBaseUrl $(exclientBaseUrl)
                 -samlSigningCert $(samlSigningCert)
