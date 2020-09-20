@@ -256,7 +256,9 @@
 							"REDIS_URL": "[concat(parameters('redisConn'),'/6')]",
 							"SECRET_KEY": "[parameters('samlSigningCertRsaPrivateKey')]",
 							"SECRET_KEY_BASE": "[parameters('SecretKeyBase')]",
-							"USE_TEST_IDP": "false"
+							"USE_TEST_IDP": "false",
+							"SERVICE_ID": "[parameters('serviceID')]",
+							"ASSERTION_API": "[parameters('assertionsHost')]"
 						}
 					}
 				}
