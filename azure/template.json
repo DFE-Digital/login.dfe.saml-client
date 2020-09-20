@@ -259,7 +259,6 @@
 							"USE_TEST_IDP": "false",
 							"SERVICE_ID": "[parameters('serviceID')]",
 							"ASSERTION_API": "[parameters('assertionsHost')]",
-							"ASSERTION_API_SECRET": "[parameters('assertionsSecret')]",
 							"SCM_DO_BUILD_DURING_DEPLOYMENT": "true"
 						}
 					}
