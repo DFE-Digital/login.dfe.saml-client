@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "appServiceName": {
@@ -47,49 +47,90 @@
                 "description": "The number of workers to assign to the app service within the app service plan"
             }
         },
-        "appServiceConfigPath": {
+        "appInsightsInstrumentationKey": {
             "type": "string",
+            "defaultValue": "",
             "metadata": {
-                "description": "JSON string containing app config"
+                "description": "Required value for application service"
             }
         },
-        "customHostName": {
+        "exclientBaseUrl": {
             "type": "string",
-            "defaultValue": ""
-        },
-        "certificateName": {
-            "type": "string"
-        },
-        "keyVaultName": {
-            "type": "string",
+            "defaultValue": "",
             "metadata": {
-                "description": "The name of the Key Vault that stores application certificates"
+               "description": "Required value for application service"
             }
         },
-        "keyVaultResourceGroup": {
+        "samlSigningCert": {
             "type": "string",
+            "defaultValue": "",
             "metadata": {
-                "description": "The name of the Resource Group that contains the Key Vault"
+               "description": "Required value for application service"
             }
         },
-        "auditServiceBusConnectionString": {
+        "oidcHost": {
             "type": "string",
+            "defaultValue": "",
             "metadata": {
-                "description": "ASB Connection String"
+               "description": "Required value for application service"
             }
         },
-        "auditServiceBusTopicName": {
+        "redisConn": {
             "type": "string",
+            "defaultValue": "",
             "metadata": {
-                "description": "ASB Topic Name"
+               "description": "Required value for application service"
             }
         },
-        "auditServiceBusSubscriptionName": {
+        "samlSigningCertRsaPrivateKey": {
             "type": "string",
+            "defaultValue": "",
             "metadata": {
-                "description": "ASB Subscription Name"
+               "description": "Required value for application service"
             }
-        }
+        },
+        "secretKeyBase": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "serviceID": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "assertionsHost": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "assertionsSecret": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "profileHost": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        },
+        "identityURL": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+               "description": "Required value for application service"
+            }
+        }      
     },
     "variables": {
     },
@@ -127,7 +168,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-azure-config.json",
+					"uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-azure-config.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -147,7 +188,7 @@
                         "value": "[parameters('numberOfWorkers')]"
                     },
                     "appServiceConfigPath": {
-                        "value": "[parameters('appServiceConfigPath')]"
+                        "value": ""
                     },
                     "minTlsVersion": {
                         "value": "[parameters('minTlsVersion')]"
@@ -158,18 +199,42 @@
                     "certificateThumbprint": {
                         "value": ""
                     },
-                    "additionalAppSettings": {
+					"additionalAppSettings": {
                         "value": {
-                            "JUST_TESTING": "12.4"
+                            "APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('appInsightsInstrumentationKey')]",
+							"BASE_URL": "[parameters('exclientBaseUrl')]",
+							"CERT": "[parameters('samlSigningCert')]",
+							"LANG": "en_US.UTF-8",
+							"OIDC_CLIENT_ID": "EXCLIENT",
+							"OIDC_CLIENT_SECRET": "exclient",
+							"OIDC_HOST": "[parameters('oidcHost')]",
+							"RACK_ENV": "production",
+							"RAILS_ENV": "production",
+							"RAILS_LOG_TO_STDOUT": "enabled",
+							"RAILS_SERVE_STATIC_FILES": "enabled",
+							"REDIS_URL": "[concat(parameters('redisConn'),'/6')]",
+							"SECRET_KEY": "[parameters('samlSigningCertRsaPrivateKey')]",
+							"SECRET_KEY_BASE": "[parameters('SecretKeyBase')]",
+							"USE_TEST_IDP": "false",
+							"SERVICE_ID":  "[parameters('serviceID')]",
+							"ASSERTION_API": "[parameters('assertionsHost')]",
+							"ASSERTION_API_SECRET": "[parameters('assertionsSecret')]",
+							"SLO_URL": "[concat('https://',parameters('profileHost'),'/signout/')]",
+							"SCM_DO_BUILD_DURING_DEPLOYMENT": "true",
+							"IDENTITY_URL": "[parameters('identityURL')]", 
+							"DISPLAY_XML": "false"
                         }
-                    }
-                }
-            },
+                    }	                    
+				}   
+        },
             "dependsOn": [
                 "[parameters('appServicePlanName')]"
-            ]
-        }
-    ],
-	"outputs": {
+        ]
     }
+    ],
+	    "outputs": {
+    }
+	
 }
+
+
