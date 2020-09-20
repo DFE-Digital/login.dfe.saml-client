@@ -258,7 +258,10 @@
 							"SECRET_KEY_BASE": "[parameters('SecretKeyBase')]",
 							"USE_TEST_IDP": "false",
 							"SERVICE_ID": "[parameters('serviceID')]",
-							"ASSERTION_API": "[parameters('assertionsHost')]"
+							"ASSERTION_API": "[parameters('assertionsHost')]",
+							"ASSERTION_API_SECRET": "[parameters('assertionsSecret')]",
+							"SLO_URL": "[concat('https://',parameters('profileHost'),'/signout/')]",
+							"SCM_DO_BUILD_DURING_DEPLOYMENT": "true"
 						}
 					}
 				}
