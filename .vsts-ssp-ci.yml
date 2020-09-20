@@ -61,18 +61,13 @@ stages:
                 -minTlsVersion 1.2
                 -numberOfWorkers 1
                 -nodeVersion 14.5.0
-                -appInsightsInstrumentationKey $(appInsightsInstrumentationKey)
-                -exclientBaseUrl $(exclientBaseUrl)
-                -samlSigningCert $(samlSigningCert)
-                -oidcHost $(oidcHost)
-                -redisConn $(redisConn)
-                -samlSigningCertRsaPrivateKey $(samlSigningCertRsaPrivateKey)
-                -secretKeyBase $(secretKeyBase)
-                -serviceID $(serviceID)
-                -assertionsHost $(assertionsHost)
-                -assertionsSecret $(assertionsSecret)
-                -profileHost $(profileHost)
-                -identityURL $(identityURL)'	                          
+                -certificateName "blank"
+                -appServiceConfigPath "/var"
+                -keyVaultName "blank"
+                -keyVaultResourceGroup "blank"
+                -auditServiceBusConnectionString "auditbus-dev-sb-1.servicebus.windows.net"
+                -auditServiceBusTopicName "audit"
+                -auditServiceBusSubscriptionName "blank"'
 
 - stage: publishapp
   dependsOn: deploy
