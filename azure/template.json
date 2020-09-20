@@ -244,7 +244,10 @@
 						"value": {
 							"APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('appInsightsInstrumentationKey')]",
 							"BASE_URL": "[parameters('exclientBaseUrl')]",
-							"CERT": "[parameters('samlSigningCert')]"
+							"CERT": "[parameters('samlSigningCert')]",
+							"LANG": "en_US.UTF-8",
+							"OIDC_CLIENT_ID": "EXCLIENT",
+							"OIDC_CLIENT_SECRET": "exclient"
 						}
 					}
 				}
