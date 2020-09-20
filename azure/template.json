@@ -249,7 +249,11 @@
 							"OIDC_CLIENT_ID": "EXCLIENT",
 							"OIDC_CLIENT_SECRET": "exclient",
 							"OIDC_HOST": "[parameters('oidcHost')]",
-							"RACK_ENV": "production"
+							"RACK_ENV": "production",
+							"RAILS_ENV": "production",
+							"RAILS_LOG_TO_STDOUT": "enabled",
+							"RAILS_SERVE_STATIC_FILES": "enabled",
+							"REDIS_URL": "[concat(parameters('redisConn'),'/6')]"
 						}
 					}
 				}
