@@ -242,7 +242,8 @@
 					},
 					"additionalAppSettings": {
 						"value": {
-							"APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('appInsightsInstrumentationKey')]"
+							"APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('appInsightsInstrumentationKey')]",
+							"BASE_URL": "[parameters('exclientBaseUrl')]"
 						}
 					}
 				}
