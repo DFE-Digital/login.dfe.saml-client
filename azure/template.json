@@ -242,28 +242,7 @@
 					},
 					"additionalAppSettings": {
 						"value": {
-							"APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('appInsightsInstrumentationKey')]",
-							"BASE_URL": "[parameters('exclientBaseUrl')]",
-							"CERT": "[parameters('samlSigningCert')]",
-							"LANG": "en_US.UTF-8",
-							"OIDC_CLIENT_ID": "EXCLIENT",
-							"OIDC_CLIENT_SECRET": "exclient",
-							"OIDC_HOST": "[parameters('oidcHost')]",
-							"RACK_ENV": "production",
-							"RAILS_ENV": "production",
-							"RAILS_LOG_TO_STDOUT": "enabled",
-							"RAILS_SERVE_STATIC_FILES": "enabled",
-							"REDIS_URL": "[concat(parameters('redisConn'),'/6')]",
-							"SECRET_KEY": "[parameters('samlSigningCertRsaPrivateKey')]",
-							"SECRET_KEY_BASE": "[parameters('SecretKeyBase')]",
-							"USE_TEST_IDP": "false",
-							"SERVICE_ID": "[parameters('serviceID')]",
-							"ASSERTION_API": "[parameters('assertionsHost')]",
-							"ASSERTION_API_SECRET": "[parameters('assertionsSecret')]",
-							"SLO_URL": "[concat('https://',parameters('profileHost'),'/signout/')]",
-							"SCM_DO_BUILD_DURING_DEPLOYMENT": "true",
-							"IDENTITY_URL": "[parameters('identityURL')]",
-							"DISPLAY_XML": "false"
+							"APPINSIGHTS_INSTRUMENTATIONKEY": "[parameters('appInsightsInstrumentationKey')]"
 						}
 					}
 				}
