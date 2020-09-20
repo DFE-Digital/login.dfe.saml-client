@@ -247,7 +247,9 @@
 							"CERT": "[parameters('samlSigningCert')]",
 							"LANG": "en_US.UTF-8",
 							"OIDC_CLIENT_ID": "EXCLIENT",
-							"OIDC_CLIENT_SECRET": "exclient"
+							"OIDC_CLIENT_SECRET": "exclient",
+							"OIDC_HOST": "[parameters('oidcHost')]",
+							"RACK_ENV": "production"
 						}
 					}
 				}
