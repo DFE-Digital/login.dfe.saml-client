@@ -17,6 +17,7 @@ trigger:
 
 variables:
 - group: platform-global
+- group: platform-dev
 
 stages:
 #build
@@ -67,7 +68,8 @@ stages:
                 -keyVaultResourceGroup "blank"
                 -auditServiceBusConnectionString "auditbus-dev-sb-1.servicebus.windows.net"
                 -auditServiceBusTopicName "audit"
-                -auditServiceBusSubscriptionName "blank"'
+                -auditServiceBusSubscriptionName "blank"
+                -appInsightsInstrumentationKey $(appInsightsInstrumentationKey)'
 
 - stage: publishapp
   dependsOn: deploy
