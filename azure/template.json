@@ -259,7 +259,10 @@
 							"USE_TEST_IDP": "false",
 							"SERVICE_ID": "[parameters('serviceID')]",
 							"ASSERTION_API": "[parameters('assertionsHost')]",
-							"SCM_DO_BUILD_DURING_DEPLOYMENT": "true"
+							"ASSERTION_API_SECRET": "[parameters('assertionsSecret')]",
+							"SLO_URL": "[concat('https://',parameters('profileHost'),'/signout/')]",
+							"IDENTITY_URL": "[parameters('identityURL')]",
+							"DISPLAY_XML": "false"
 						}
 					}
 				}
