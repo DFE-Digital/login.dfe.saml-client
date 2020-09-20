@@ -18,6 +18,7 @@ trigger:
 variables:
 - group: platform-global
 - group: platform-dev
+- group: platform-dev-samlclient
 
 stages:
 #build
@@ -69,7 +70,18 @@ stages:
                 -auditServiceBusConnectionString "auditbus-dev-sb-1.servicebus.windows.net"
                 -auditServiceBusTopicName "audit"
                 -auditServiceBusSubscriptionName "blank"
-                -appInsightsInstrumentationKey $(appInsightsInstrumentationKey)'
+                -appInsightsInstrumentationKey $(appInsightsInstrumentationKey)
+                -exclientBaseUrl $(exclientBaseUrl)
+                -samlSigningCert $(samlSigningCert)
+                -oidcHost $(oidcHost)
+                -redisConn $(redisConn)
+                -samlSigningCertRsaPrivateKey $(samlSigningCertRsaPrivateKey)
+                -secretKeyBase $(secretKeyBase)
+                -serviceID $(serviceID)
+                -assertionsHost $(assertionsHost)
+                -assertionsSecret $(assertionsSecret)
+                -profileHost $(profileHost)
+                -identityURL $(identityURL)'
 
 - stage: publishapp
   dependsOn: deploy
