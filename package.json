@@ -4,21 +4,20 @@
   "description": "Example SAML client to connect to DfE Login SAML Proxy",
   "main": "index.js",
   "scripts": {
-    "setup": "./generate-certs.sh",
-    "dev": "PORT=44301;NODE_ENV=dev; node src/index.js",
+    "dev": "./setup/generate-certs.sh; PORT=44301;NODE_ENV=dev; node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DFE-Digital/login.dfe.examples.saml-client.git"
+    "url": "git+https://github.com/DFE-Digital/login.dfe.samlclient.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DFE-Digital/login.dfe.examples.saml-client/issues"
+    "url": "https://github.com/DFE-Digital/login.dfe.samlclient/issues"
   },
-  "homepage": "https://github.com/DFE-Digital/login.dfe.examples.saml-client#readme",
+  "homepage": "https://github.com/DFE-Digital/login.dfe.samlclient#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
