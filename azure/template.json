@@ -262,9 +262,7 @@
 							"ASSERTION_API_SECRET": "[parameters('assertionsSecret')]",
 							"SLO_URL": "[concat('https://',parameters('profileHost'),'/signout/')]",
 							"IDENTITY_URL": "[parameters('identityURL')]",
-							"DISPLAY_XML": "false",
-							"PORT": "193",
-							"WEBSITES_PORT": "193"
+							"DISPLAY_XML": "false"							
 						}
 					}
 				}
