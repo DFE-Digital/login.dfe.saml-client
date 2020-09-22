@@ -61,7 +61,6 @@ typings/
 .idea
 
 # dev stuff
-ssl
 .DS_Store
 
 access.log
