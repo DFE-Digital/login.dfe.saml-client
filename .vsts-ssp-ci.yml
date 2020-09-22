@@ -32,6 +32,7 @@ stages:
       additionalFoldersForBuild:
       - 'generate-certs.sh'
       - 'process.json'
+      - 'ssl'
 
 #Deploy
 - stage: deploy
@@ -112,7 +113,7 @@ stages:
           SlotName: staging
           packageForLinux: "$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip"
           RuntimeStack: "node|12.9"
-          WebConfigParameters: '-Handler iisnode -appType node'
+          WebConfigParameters: '-Handler iisnode -NodeStartFile $(platformGlobalNodeStart) -appType node'
           enableCustomDeployment: true
           TakeAppOfflineFlag: false
           RemoveAdditionalFilesFlag: true
