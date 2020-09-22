@@ -30,7 +30,8 @@ stages:
       applicationName: samlclient
       artifactName: samlclient-$(Build.BuildId)
       additionalFoldersForBuild:
-      - 'generate-certs.sh' 
+      - 'generate-certs.sh'
+      - 'process.json'
 
 #Deploy
 - stage: deploy
