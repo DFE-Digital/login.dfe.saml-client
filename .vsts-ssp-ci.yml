@@ -116,3 +116,13 @@ stages:
           TakeAppOfflineFlag: false
           RemoveAdditionalFilesFlag: true
           ExcludeFilesFromAppDataFlag: false
+
+     - task: AzureCLI@2
+       displayName: Start app
+       inputs:
+         azureSubscription: $(devServiceConnection)
+         scriptType: ps
+         scriptLocation: inlineScript
+         inlineScript: az webapp config set --resource-group $(projectId)d01-samlclient --name $(projectId)d01-samlclient --startup-file "npm run start --prefix /home/site/wwwroot/Publish"
+           
+           
