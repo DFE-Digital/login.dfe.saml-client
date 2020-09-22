@@ -4,10 +4,9 @@
   "description": "Example SAML client to connect to DfE Login SAML Proxy",
   "main": "index.js",
   "scripts": {
-    "setup": "generate-certs.sh",
+    "start": "generate-certs.sh",
     "dev": "PORT=44301;NODE_ENV=dev; node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run setup; node src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
