@@ -121,6 +121,6 @@ stages:
         displayName: Start app
         inputs:
           azureSubscription: $(devServiceConnection)
-          scriptType: ps
+          scriptType: pwsh
           scriptLocation: inlineScript
           inlineScript: az webapp config set --resource-group $(projectId)d01-samlclient --name $(projectId)d01-samlclient --startup-file "npm run start --prefix /home/site/wwwroot/Publish"
