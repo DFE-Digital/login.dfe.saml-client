@@ -3,15 +3,12 @@
 clear
 cd /home/site/wwwroot 
 
-if [ ! -d node_modules ]; then
-  cd /home/site/wwwroot
-  npm cache clean
-  npm config set dev false 
-  npm install express
-  npm install --prefer-online
-else
-  echo "Node modules directory already exists"
-fi
+npm cache clean
+npm config set dev false 
+npm install express
+npm install --prefer-online
+
+sleep 15
 
 if [ ! -d ssl ]; then
 
@@ -33,6 +30,7 @@ RUNNING=$?
 if [ "${RUNNING}" -ne 0 ]; then
   echo "Starting PM2 process"
   pm2 start /home/site/wwwroot/process.json
+  sleep 15
 else
   echo "PM2 process exists"
 fi
