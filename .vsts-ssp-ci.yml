@@ -27,11 +27,27 @@ stages:
   displayName: Build
   jobs: 
    - job: archivefolder
-     steps:     
+     steps:
+      - task: CopyFiles@2
+      displayName: Copy files for staging
+      inputs:
+        SourceFolder: $(Build.Repository.LocalPath)
+        Contents: |
+          app_data/**
+          azure/**
+          config/**
+          node_modules/**
+          src/**
+          package.json
+          process.json
+          generate-certs.sh
+        TargetFolder: $(System.DefaultWorkingDirectory)/Publish
+        CleanTargetFolder: true
+
       - task: ArchiveFiles@1
         displayName: Archive build
         inputs:
-          rootFolder: $(Build.Repository.LocalPath)
+          rootFolder: $(System.DefaultWorkingDirectory)/Publish
           includeRootFolder: true
           archiveType: zip
           archiveFile: $(Build.ArtifactStagingDirectory)/samlclient-$(Build.BuildId).zip
