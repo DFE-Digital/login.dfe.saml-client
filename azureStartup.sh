@@ -3,13 +3,6 @@
 clear
 cd /home/site/wwwroot 
 
-npm cache clean
-npm config set dev false 
-npm install express
-npm install --prefer-online
-
-sleep 15
-
 if [ ! -d ssl ]; then
 
   echo "Creating SSL certs for localhost."

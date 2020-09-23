@@ -155,3 +155,4 @@ stages:
           TakeAppOfflineFlag: false
           RemoveAdditionalFilesFlag: true
           ExcludeFilesFromAppDataFlag: false
+          StartupCommand: "/home/site/wwwroot/azureStartup.sh"
