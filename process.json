@@ -1,0 +1,6 @@
+{
+"name": "samlclient",
+"script": "src/index.js",
+"instances": "max",
+"exec_mode": "fork"
+}
