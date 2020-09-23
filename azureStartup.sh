@@ -4,6 +4,8 @@ clear
 cd /home/site/wwwroot 
 
 if [ ! -d node_modules ]; then
+  cd /home/site/wwwroot 
+  npm config set dev false 
   npm install
 else
   echo "Node modules directory already exists"
