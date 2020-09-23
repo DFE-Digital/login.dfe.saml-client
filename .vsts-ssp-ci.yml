@@ -109,6 +109,7 @@ stages:
                 -assertionsSecret "$(assertionsSecret)"
                 -profileHost "$(profileHost)"
                 -identityURL "$(identityURL)"'
+
 - stage: publishapp
   dependsOn: deploy
   displayName: Publish App
@@ -150,4 +151,23 @@ stages:
           azureSubscription: $(devServiceConnection)
           appType: 'webApp'
           WebAppName: $(projectId)d01-samlclient
-          packageForLinux:  "$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip"          
+          packageForLinux:  "$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip"
+      
+      - task: AzureAppServiceManage@0
+        displayName: 'Swap Slots'
+        inputs:
+          azureSubscription: $(devServiceConnection)
+          WebAppName: $(projectId)d01-samlclient
+          ResourceGroupName: $(projectId)d01-samlclient
+          SourceSlot: staging
+
+      - task: AzureAppServiceManage@0
+        displayName: 'Stop Staging Slot'
+        inputs:
+          azureSubscription: $(devServiceConnection)
+          Action: 'Stop Azure App Service'
+          WebAppName: $(projectId)d01-samlclient'
+          SpecifySlotOrASE: true
+          ResourceGroupName: $(projectId)d01-samlclient
+          Slot: staging
+        condition: always()
