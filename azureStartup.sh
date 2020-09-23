@@ -7,6 +7,9 @@ if [ ! -d node_modules ]; then
   npm install
 
 fi
+else
+  echo "Node modules directory already exists"
+fi
 
 if [ ! -d ssl ]; then
 
@@ -15,10 +18,12 @@ if [ ! -d ssl ]; then
 
     if [ ! -f ssl/localhost.txt ]; then
         openssl genrsa -out ssl/localhost.key 2048
-
         openssl req -new -x509 -key ssl/localhost.key -out ssl/localhost.cert -days 3650 -subj /CN=localhost
     fi
 
+fi
+else
+  echo "ssl directory already exists"
 fi
 
 echo "Checking if PM2 process exists"
@@ -31,6 +36,6 @@ if [ "${RUNNING}" -ne 0 ]; then
 fi
 else
   echo "PM2 process exists"
-fi;
+fi
 
-
+pm2 logs
