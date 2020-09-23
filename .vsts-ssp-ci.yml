@@ -142,7 +142,7 @@ stages:
           TakeAppOfflineFlag: false
           RemoveAdditionalFilesFlag: true
           ExcludeFilesFromAppDataFlag: false
-          StartupCommand: "cd /home/site/wwwroot && npm install && pm2 start process.json"
+          StartupCommand: "cd /home/site/wwwroot && npm install && ./generate-certs.sh && pm2 start process.json"
 
       - task: AzureRmWebAppDeployment@4
         inputs:
