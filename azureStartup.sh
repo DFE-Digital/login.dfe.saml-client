@@ -40,5 +40,3 @@ fi
 cat /home/LogFiles/webssh/pm2.log
 
 echo "Finished reading pm2 log...now stream it!"
-
-pm2 logs
