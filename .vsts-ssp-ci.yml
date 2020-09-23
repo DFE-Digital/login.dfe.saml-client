@@ -48,7 +48,7 @@ stages:
         displayName: Archive build
         inputs:
           rootFolder: $(System.DefaultWorkingDirectory)/Publish
-          includeRootFolder: true
+          includeRootFolder: false
           archiveType: zip
           archiveFile: $(Build.ArtifactStagingDirectory)/samlclient-$(Build.BuildId).zip
           replaceExistingArchive: true
