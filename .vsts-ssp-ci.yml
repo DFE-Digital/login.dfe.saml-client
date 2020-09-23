@@ -29,20 +29,20 @@ stages:
    - job: archivefolder
      steps:
       - task: CopyFiles@2
-      displayName: Copy files for staging
-      inputs:
-        SourceFolder: $(Build.Repository.LocalPath)
-        Contents: |
-          app_data/**
-          azure/**
-          config/**
-          node_modules/**
-          src/**
-          package.json
-          process.json
-          generate-certs.sh
-        TargetFolder: $(System.DefaultWorkingDirectory)/Publish
-        CleanTargetFolder: true
+        displayName: Copy files for staging
+        inputs:
+          SourceFolder: $(Build.Repository.LocalPath)
+          Contents: |
+            app_data/**
+            azure/**
+            config/**
+            node_modules/**
+            src/**
+            package.json
+            process.json
+            generate-certs.sh
+          TargetFolder: $(System.DefaultWorkingDirectory)/Publish
+          CleanTargetFolder: true
 
       - task: ArchiveFiles@1
         displayName: Archive build
