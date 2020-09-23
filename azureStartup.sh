@@ -7,7 +7,7 @@ if [ ! -d node_modules ]; then
   cd /home/site/wwwroot
   npm cache clean
   npm config set dev false 
-  npm install
+  npm install --prefer-online
 else
   echo "Node modules directory already exists"
 fi
