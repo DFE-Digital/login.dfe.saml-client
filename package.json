@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "PORT=44301;NODE_ENV=dev; node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./generate-certs.sh && node src/index.js"
   },
   "repository": {
     "type": "git",
