@@ -41,5 +41,5 @@ stages:
         displayName: Publish Pipeline Artifact
         inputs:
           targetPath: $(Build.ArtifactStagingDirectory)/samlclient-$(Build.BuildId).zip
-          artifact: ${{parameters.artifactName}}
+          artifact: samlclient-$(Build.BuildId)
           publishLocation: 'pipeline'
