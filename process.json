@@ -1,6 +1,6 @@
 {
-"name": "samlclient",
-"script": "src/index.js",
-"instances": "max",
-"exec_mode": "fork"
+  "name": "samlclient",
+  "script": "src/index.js",
+  "instances": "max",
+  "exec_mode": "cluster"
 }
