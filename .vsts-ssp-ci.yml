@@ -39,7 +39,7 @@ stages:
             src/**
             package.json
             process.json
-            generate-certs.sh
+            azureStartup.sh
           TargetFolder: $(System.DefaultWorkingDirectory)/Publish
           CleanTargetFolder: true
 
@@ -142,7 +142,7 @@ stages:
           TakeAppOfflineFlag: false
           RemoveAdditionalFilesFlag: true
           ExcludeFilesFromAppDataFlag: false
-          StartupCommand: "cd /home/site/wwwroot && npm install && ./generate-certs.sh && pm2 start process.json && pm2 logs"
+          StartupCommand: "/home/site/wwwroot/azureStartup.sh"
 
       - task: AzureRmWebAppDeployment@4
         inputs:
