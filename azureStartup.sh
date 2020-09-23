@@ -4,7 +4,8 @@ clear
 cd /home/site/wwwroot 
 
 if [ ! -d node_modules ]; then
-  cd /home/site/wwwroot 
+  cd /home/site/wwwroot
+  npm cache clean
   npm config set dev false 
   npm install
 else
