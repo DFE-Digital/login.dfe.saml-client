@@ -142,6 +142,7 @@ stages:
           TakeAppOfflineFlag: false
           RemoveAdditionalFilesFlag: true
           ExcludeFilesFromAppDataFlag: false
+          StartupCommand: "cd /home/site/wwwroot && npm install"
 
       - task: AzureRmWebAppDeployment@4
         inputs:
