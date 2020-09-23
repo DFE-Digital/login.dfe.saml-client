@@ -26,7 +26,7 @@ stages:
 - stage: build
   displayName: Build
   jobs: 
-   - job: Build app
+   - job: archivefolder
      steps:     
       - task: ArchiveFiles@1
         displayName: Archive build
