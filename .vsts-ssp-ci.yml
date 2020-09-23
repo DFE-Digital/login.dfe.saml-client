@@ -103,18 +103,9 @@ stages:
             Get-ChildItem $(System.ArtifactsDirectory) –Recurse
       
       - task: AzureRmWebAppDeployment@4
-        displayName: Deploy Code
         inputs:
+          ConnectionType: 'AzureRM'
           azureSubscription: $(devServiceConnection)
-          appType: webAppLinux
+          appType: 'webApp'
           WebAppName: $(projectId)d01-samlclient
-          deployToSlotOrASE: true
-          ResourceGroupName: $(projectId)d01-samlclient
-          SlotName: staging
-          packageForLinux: "$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip"
-          RuntimeStack: "node|12.9"
-          WebConfigParameters: '-Handler iisnode -NodeStartFile $(platformGlobalNodeStart) -appType node'
-          enableCustomDeployment: true
-          TakeAppOfflineFlag: false
-          RemoveAdditionalFilesFlag: true
-          ExcludeFilesFromAppDataFlag: false
+          packageForLinux:  "$(System.ArtifactsDirectory)/samlclient-$(Build.BuildId).zip"
