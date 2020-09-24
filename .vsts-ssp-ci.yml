@@ -22,18 +22,55 @@ variables:
 
 stages:
 #build
+
 - stage: build
   displayName: Build
-  jobs:
-  - template: /Application/node/jobs/signin-master-build-job.yml@devopsTemplates
-    parameters:
-      applicationName: samlclient
-      artifactName: samlclient-$(Build.BuildId)
-      additionalFoldersForBuild:
-      - 'generate-certs.sh'
-      - 'process.json'
-      - 'ssl//**'
+  jobs: 
+   - job: archivefolder
+     steps:
 
+      - task: Npm@1
+        displayName: Npm install
+        inputs:
+          command: custom
+          workingDir: $(Build.Repository.LocalPath)
+          verbose: true
+          customCommand: install --force --json
+          customRegistry: useFeed
+          customFeed: '25763a8a-0ad8-43cf-a6a5-c0fcea6b74a7'
+
+      - task: CopyFiles@2
+        displayName: Copy files for staging
+        inputs:
+          SourceFolder: $(Build.Repository.LocalPath)
+          Contents: |
+            app_data/**
+            azure/**
+            config/**
+            node_modules/**
+            src/**
+            package.json
+            process.json
+            azureStartup.sh
+          TargetFolder: $(System.DefaultWorkingDirectory)/Publish
+          CleanTargetFolder: true
+
+      - task: ArchiveFiles@1
+        displayName: Create Archive
+        inputs:
+          rootFolder: $(System.DefaultWorkingDirectory)/Publish
+          includeRootFolder: false
+          archiveType: zip
+          archiveFile: $(Build.ArtifactStagingDirectory)/samlclient-$(Build.BuildId).zip
+          replaceExistingArchive: true
+    
+      - task: PublishPipelineArtifact@1
+        displayName: Publish Pipeline Artifact
+        inputs:
+          targetPath: $(Build.ArtifactStagingDirectory)/samlclient-$(Build.BuildId).zip
+          artifact: samlclient-$(Build.BuildId)
+          publishLocation: 'pipeline'
+      
 #Deploy
 - stage: deploy
   dependsOn: build
@@ -118,3 +155,4 @@ stages:
           TakeAppOfflineFlag: false
           RemoveAdditionalFilesFlag: true
           ExcludeFilesFromAppDataFlag: false
+          StartupCommand: "/home/site/wwwroot/azureStartup.sh"
