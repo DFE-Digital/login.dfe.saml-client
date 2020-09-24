@@ -97,7 +97,7 @@ app.post('/login/callback',
   passport.authenticate('saml',
     {
       failureRedirect: '/?error=true',
-      uccessRedirect: '/',
+      successRedirect: '/',
       failureFlash: true
     })
 );
