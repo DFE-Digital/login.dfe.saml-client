@@ -164,14 +164,3 @@ stages:
           WebAppName: $(projectId)d01-samlclient
           ResourceGroupName: $(projectId)d01-samlclient
           SourceSlot: staging
-
-      - task: AzureAppServiceManage@0
-        displayName: 'Stop Staging Slot'
-        inputs:
-          azureSubscription: $(devServiceConnection)
-          Action: 'Stop Azure App Service'
-          WebAppName: $(projectId)d01-samlclient'
-          SpecifySlotOrASE: true
-          ResourceGroupName: $(projectId)d01-samlclient
-          Slot: staging
-        condition: always()
