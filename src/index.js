@@ -121,6 +121,8 @@ if (config.hostingEnvironment.env === 'dev') {
     logger.info(`Dev server listening on https://${config.hostingEnvironment.host}:${config.hostingEnvironment.port} with config:\n${JSON.stringify(config)}`);
   });
 } else {
+  app.proxy = true;
+  
   app.listen(config.hostingEnvironment.port, () => {
     logger.info(`Server listening on http://${config.hostingEnvironment.host}:${config.hostingEnvironment.port}`);
   });
