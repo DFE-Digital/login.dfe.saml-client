@@ -104,6 +104,22 @@ app.post('/login/callback',
   }
 );
 
+app.get('/login/callback', function (req, res) {
+
+  let user_assertions = [];
+  if (req.isAuthenticated()) {
+    for (let i = 0; i < Object.keys(req.user).length; i++) {
+      user_assertions.push(`${Object.keys(req.user)[i]} - ${req.user[Object.keys(req.user)[i]]}`)
+    }
+  }
+
+  res.render('index', {
+    isLoggedIn: req.isAuthenticated(),
+    user_assertions,
+    user: req.user ? req.user : { id: '', name: '' }
+  });
+});
+
 
 // Setup server
 if (config.hostingEnvironment.env === 'dev') {
