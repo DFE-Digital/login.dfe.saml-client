@@ -110,14 +110,14 @@ app.post('/login/callback',
 if (config.hostingEnvironment.env === 'dev') {
   app.proxy = true;
 
-  const https = require('https');
+  const http = require('https');
   const options = {
     key: fs.readFileSync('./ssl/localhost.key'),
     cert: fs.readFileSync('./ssl/localhost.cert'),
     requestCert: false,
     rejectUnauthorized: false
   };
-  const server = https.createServer(options, app);
+  const server = http.createServer(options, app);
 
   server.listen(config.hostingEnvironment.port, () => {
     logger.info(`Dev server listening on https://${config.hostingEnvironment.host}:${config.hostingEnvironment.port} with config:\n${JSON.stringify(config)}`);
