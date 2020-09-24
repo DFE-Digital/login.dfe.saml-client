@@ -97,9 +97,11 @@ app.post('/login/callback',
   passport.authenticate('saml',
     {
       failureRedirect: '/?error=true',
-      successRedirect: '/',
       failureFlash: true
-    })
+    }), (req, res) => {
+      console.log('callback log');
+      res.redirect('/', 302);
+    }
 );
 
 
@@ -122,7 +124,7 @@ if (config.hostingEnvironment.env === 'dev') {
   });
 } else {
   app.proxy = true;
-  
+
   app.listen(config.hostingEnvironment.port, () => {
     logger.info(`Server listening on http://${config.hostingEnvironment.host}:${config.hostingEnvironment.port}`);
   });
