@@ -98,11 +98,9 @@ app.post('/login/callback',
   passport.authenticate('saml',
     {
       failureRedirect: '/?error=true',
+      successRedirect: '/',
       failureFlash: true
-    }), (req, res) => {
-      console.log('callback log');
-      res.redirect('/', 302);
-    }
+    })
 );
 
 
