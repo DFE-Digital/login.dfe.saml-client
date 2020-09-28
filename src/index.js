@@ -54,6 +54,7 @@ passport.deserializeUser(function (user, done) {
 // Express settings
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'));
+app.set('trust proxy', 1)
 
 // Express middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -97,11 +98,9 @@ app.post('/login/callback',
   passport.authenticate('saml',
     {
       failureRedirect: '/?error=true',
+      successRedirect: '/',
       failureFlash: true
-    }), (req, res) => {
-      console.log('callback log');
-      res.redirect('/', 302);
-    }
+    })
 );
 
 
