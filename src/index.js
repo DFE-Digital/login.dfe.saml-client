@@ -8,6 +8,7 @@ const winston = require('winston');
 const path = require('path');
 const fs = require('fs');
 const formatXML = require('xml-formatter');
+const cookieSession = require('cookie-session')
 
 const config = require('./Config');
 
@@ -58,11 +59,20 @@ app.set('trust proxy', 1)
 
 // Express middleware
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: config.hostingEnvironment.sessionSecret
+// app.use(session({
+//   resave: true,
+//   saveUninitialized: true,
+//   secret: config.hostingEnvironment.sessionSecret
+// }));
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['SUPER_SECRET_KEY_123'],
+
+  // Cookie Options
+  maxAge: 10 * 60 * 1000 // 10 mins
 }));
+
 app.use(morgan('combined', { stream: fs.createWriteStream('./access.log', { flags: 'a' }) }));
 app.use(morgan('dev'));
 app.use(passport.initialize());
