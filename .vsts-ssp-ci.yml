@@ -85,6 +85,7 @@ stages:
       runOnce:
         deploy:
           steps:
+          - checkout: self
           - pwsh: |
               Get-ChildItem -Path $(Build.SourcesDirectory) –Recurse
           - template: /Infrastructure/steps/deploy-template.yml@devopsTemplates
