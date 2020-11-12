@@ -13,12 +13,14 @@ const cookieSession = require('cookie-session')
 const config = require('./Config');
 
 const app = express();
-const logger = new (winston.Logger)({
-  colors: config.loggerSettings.colors,
-  transports: [
-    new (winston.transports.Console)({ level: 'info', colorize: true })
-  ]
-});
+// const logger = new (winston.Logger)({
+//   colors: config.loggerSettings.colors,
+//   transports: [
+//     new (winston.transports.Console)({ level: 'info', colorize: true })
+//   ]
+// });
+
+const logger = console;
 
 
 // Passport
@@ -28,7 +30,13 @@ passport.use(new SamlStrategy(
     entryPoint: config.identityProvider.url,
     issuer: config.identityProvider.issuer,
     authnRequestBinding: 'HTTP-POST',
-    skipRequestCompression: true
+    skipRequestCompression: true,
+    additionalParams: {
+      serviceId: 'b543b739-9791-4846-8638-cb35d66dd645',
+      clientId: 'DAS',
+      clientSecret: 'condiment-beetled-dreamy-milquetoast',
+      samlTarget: 'https://localhost:44301/login/callback'
+    }
   },
   function (profile, done) {
     let user = profile;
