@@ -95,7 +95,7 @@ stages:
               resourceGroupName: $(projectId)d01-samlclient
               location: 'westeurope'
               templateFilePath: '$(Build.SourcesDirectory)/azure/template.json'
-              tags: $Tags
+              tags: '@{"Environment" = $(environmentName);"Portfolio" = "Digital and Technology";"Service" = "Authentication Services (EUC)";"Parent Business" = "Shared IT core services";"Product" = "DfE Sign-in";"Service Line" = "Technology Services";"Service Offering" = "DfE Sign-in";"Portfolio" = "Digital and Technology"}'
               armParameterOverrideString: '
                 -appServiceName $(projectId)d01-samlclient
                 -appServicePlanName $(projectId)d01-samlclient-asp
