@@ -123,7 +123,7 @@ stages:
                 -assertionsSecret "$(assertionsSecret)"
                 -profileHost "$(profileHost)"
                 -identityURL "$(identityURL)"
-                -Tag "$(Tags)"
+                -Tag "$(Tags)"'
 
 
 - stage: publishapp
