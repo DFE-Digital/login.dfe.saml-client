@@ -95,7 +95,7 @@ stages:
               resourceGroupName: $(projectId)d01-samlclient
               location: 's141d01'
               templateFilePath: '$(Build.SourcesDirectory)/azure/template.json'
-              
+              tags: '$Tags'
               armParameterOverrideString: '
                 -appServiceName $(projectId)d01-samlclient
                 -appServicePlanName $(projectId)d01-samlclient-asp
@@ -122,9 +122,7 @@ stages:
                 -assertionsHost "$(assertionsHost)"
                 -assertionsSecret "$(assertionsSecret)"
                 -profileHost "$(profileHost)"
-                -identityURL "$(identityURL)"
-                -Tag "@{"Environment" = "$(EnvironmentName)"; "Parent Business" = "Shared IT core services"; "Product" = "DfE Sign-in"; "Service" = "Authentication Services (EUC)"; "Service Line" = "Technology Services"; "Service Offering" = "DfE Sign-in"; "Portfolio" = "Digital and Technology"}"
-                '
+                -identityURL "$(identityURL)"'
 
 
 - stage: publishapp
