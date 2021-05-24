@@ -93,7 +93,7 @@ stages:
               serviceConnection: $(devServiceConnection)
               subscriptionId: $(devSubscriptionId)
               resourceGroupName: $(projectId)d01-samlclient
-              location: 's141d01'
+              location: 'westeurope'
               templateFilePath: '$(Build.SourcesDirectory)/azure/template.json'
               tags: '$Tags'
               armParameterOverrideString: '
