@@ -4,7 +4,7 @@
   "instances": "max",
   "exec_mode": "cluster",
   "env": {
-    "IDENTITY_URL": "https://int-aforms.signin.education.gov.uk/saml/auth",
+    "IDENTITY_URL": "https://int-dqt.signin.education.gov.uk/saml/auth",
     "DISPLAY_XML": "true",
     "NODE_ENV": "PROD"
   }
