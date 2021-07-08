@@ -4,7 +4,7 @@
   "instances": "max",
   "exec_mode": "cluster",
   "env": {
-    "IDENTITY_URL": "https://int-kts.signin.education.gov.uk/saml/auth",
+    "IDENTITY_URL": "https://int-asp.signin.education.gov.uk/saml/auth",
     "DISPLAY_XML": "true",
     "NODE_ENV": "PROD"
   }
