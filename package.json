@@ -27,7 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
-    "passport-saml": "^0.15.0",
+    "passport-saml": "^3.2.2",
     "winston": "^2.3.1",
     "xml-formatter": "^1.2.0"
   }
